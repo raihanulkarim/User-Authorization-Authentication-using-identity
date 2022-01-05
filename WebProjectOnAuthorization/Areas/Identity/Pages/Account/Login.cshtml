@@ -1,0 +1,24 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<div class="centerLogRegElement">
+    <!-- insert the page content here -->
+        <h1 style="text-align:center">Login</h1>
+        <p style="text-align:center">Use a registered account to log in.</p>
+          <form id="account" method="post">
+          <div  style="color:red;" asp-validation-summary="All"></div>
+          <div style="color:red">@ViewData["message"]</div>
+          <div class="form_settings" >
+            <p><span>Email</span> <input class="contact" asp-for="Input.Email"/></p>
+            <p><span>Password</span><input class="contact" asp-for="Input.Password"/></p>
+            <p style="padding-top:15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="Login" /></p>
+          </div>
+        </form>
+        <p style="text-align:center"><br /><br /><a style="color:darkgreen;"  asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a></p>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,56 @@
+﻿@model WebProjectOnAuthorization.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="centerLogRegElement">
+    <!-- insert the page content here -->
+        <h1 style="text-align:center">Profile</h1>
+        <p style="text-align:center">Provide information to complete your profile.</p>
+                  <form asp-action="create" enctype="multipart/form-data">
+
+          <div  style="color:red;" asp-validation-summary="All"></div>
+          <div class="form_settings">
+              <hr>
+            <br />
+            <h6>Personal Info</h6>
+            <br />
+              <p><span>Profession:</span> <input class="contact" asp-for="Profession"/></p>
+              <p><span>Organisation:</span> <input class="contact" asp-for="Organisation"/></p>
+              <p><span>About Me:</span> <textarea class="contact" asp-for="About"></textarea></p>
+            <p><span>Profile Photo:</span> <input  class="contact" asp-for="ProImg"accept="image/*" /></p>
+            <p><span>Birth Date:</span> <input type="date" class="contact" asp-for="Birthdate"/></p>
+            <br />
+            <hr>
+            <h6>Contact Information</h6>
+            <br />
+            <p><span>Phone:</span> <input class="contact" asp-for="PhoneNo"/></p>
+            <p><span>Address:</span> <textarea class="contact" asp-for="PresentAddress"></textarea></p>
+            <p><span>Github Link:</span> <input class="contact" asp-for="Github"/></p>
+            <p><span>Twitter Link:</span> <input class="contact" asp-for="Twitter"/></p>
+            <p><span>Facebook Link:</span> <input class="contact" asp-for="Facebook"/></p>
+            <p><span>Linkdin Link:</span> <input class="contact" asp-for="Linkdin"/></p>
+            
+            <br />
+            <hr>
+            <h6>Hobby (Provide 3 of hobbies)</h6>
+            <br />
+            <p><span>First Hobby:</span> <input class="contact" asp-for="Hobby1"/></p>
+            <p><span>Description:</span> <textarea class="contact" asp-for="Hobby1Description"></textarea></p>
+            <p><span>First Hobby Photo:</span> <input  class="contact" asp-for="ImageFile"accept="image/*" /></p>
+
+            <p><span>Second Hobby:</span> <input class="contact" asp-for="Hobby2"/></p>
+            <p><span>Description:</span> <textarea class="contact" asp-for="Hobby2Description"></textarea></p><p><span>Second Hobby Photo:</span> <input  class="contact" asp-for="ImageFile1"accept="image/*" /></p>
+
+            <p><span>Third Hobby:</span> <input class="contact" asp-for="Hobby3"/></p>
+            <p><span>Description:</span> <textarea class="contact" asp-for="Hobby3Description"></textarea></p>
+            <p><span>Third Hobby Photo:</span> <input  class="contact" asp-for="ImageFile2"accept="image/*" /></p>
+
+            <p style="padding-top:15px"><span>&nbsp;</span><input class="submit" type="submit" name="info_submitted" value="save" /></p>
+          </div>
+        </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

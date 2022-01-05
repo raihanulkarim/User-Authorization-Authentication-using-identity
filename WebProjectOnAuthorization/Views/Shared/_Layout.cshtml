@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var users= UserManager.Users.ToList();
+    var userId = users.Where(r=> r.Email == User.Identity.Name).Select(r=> r.Id).FirstOrDefault();
+}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Web Project</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="~/css/site.css" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a asp-action="index" asp-controller="home">Web<span class="logo_colour">Project</span></a></h1>
+          <h2>A project on user authentication and authorization</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+          
+          @if (SignInManager.IsSignedIn(User))
+          {
+                        if (User.IsInRole("user"))
+                        {
+                            <li><a asp-action="Details" asp-route-id="@userId" asp-controller="Profile">Profile</a></li>
+                        }else{
+                             <li><a asp-action="users" asp-controller="home">Users</a></li>
+                        }
+                       
+                    <li><form  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <input class="logOut" type="submit" value="Logout"/> 
+                    </form></li>
+             }
+            else
+            {   
+                <li>
+                    <a  asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                    <li><a  asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+            }
+        </ul>
+      </div>  
+      </div>
+  <div id="content_header"></div>
+    <div id="site_content">
+      <div class="sidebar">
+      </div>
+      <div class="content">
+        @RenderBody()
+     </div>
+     </div>
+     <div id="content_footer"></div>
+    <div id="footer"><p>&copy;Copyright-2022</p>
+    </div>
+     <script src="~/js/site.js" asp-append-version="true"></script>
+ <script type="text/javascript">
+$(document).ready(function(){
+$('ul.tabs li').click(function(){
+var tab_id = $(this).attr('data-tab');
+$('ul.tabs li').removeClass('current');
+$('.tab-content').removeClass('current');
+$(this).addClass('current');
+$("#"+tab_id).addClass('current');
+});
+});
+</script>
+    @await RenderSectionAsync("Scripts", required: false)
+</div>
+</body>
+</html>

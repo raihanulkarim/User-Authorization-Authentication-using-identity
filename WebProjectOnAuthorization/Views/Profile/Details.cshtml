@@ -1,0 +1,91 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+@using Microsoft.AspNetCore.Identity
+@model WebProjectOnAuthorization.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Profile";
+    var users= UserManager.Users.ToList();
+    var userId = users.Where(r=> r.Email == User.Identity.Name).Select(r=> r.Id).FirstOrDefault();
+}
+<div>
+    <div class="profile-main">
+<div class="profile-header">
+<div class="user-detail">
+<div class="user-image">
+<img src="~/Image/@Model.ProPhoto">
+</div>
+<div class="user-data">
+<h2>@Model.FirstName @Model.LastName</h2>
+<span class="post-label">@Model.Profession</span>
+<p>at <strong>@Model.Organisation</strong><br>
+<i class="fa fa-envelope" aria-hidden="true"> @Model.Email</i><br />
+<i class="fa fa-phone" aria-hidden="true"> @Model.PhoneNo</i><br />
+<i class="fa fa-map-marker" aria-hidden="true"></i> @Model.PresentAddress
+</p>
+</div>
+<div class="social-icons">
+<a asp-action="update" asp-controller="profile" asp-route-id="@userId" type="button" class="msg-btn"><i class="fa fa-edit" aria-hidden="true"></i>Edit Profile</a>
+</div>
+</div>
+<div class="tab-panel-main">
+<ul class="tabs">
+<li class="tab-link current" data-tab="Basic-detail">Details</li>
+<li class="tab-link" data-tab="Portfolio">Hobbies</li>
+</ul>
+<div id="Basic-detail" class="tab-content current">
+<div class="bio-box">
+<div class="heading">
+<p>About Me</p>
+</div>
+<hr />
+<div class="desc">
+@Model.About
+</div>
+</div>
+<div class="detail-box">
+<p>Detail</p>
+<hr />
+<ul class="ul-first">
+<li>First Name:</li>
+<li>Last Name:</li>
+<li>Birth date:</li>
+</ul>
+<ul class="ul-second">
+<li>@Model.FirstName</li>
+<li>@Model.LastName</li>
+<li>@Model.Birthdate.ToShortDateString()</li>
+</ul>
+</div>
+</div>
+
+<div id="Portfolio" class="tab-content">
+<div class="portfolio-box">
+<div class="portfolio-img-box">
+<h3>@Model.Hobby1</h3>
+<img src="~/Image/@Model.Hobby1Image">
+<p>@Model.Hobby1Description</p>
+</div>
+<div class="portfolio-img-box">
+<h3>@Model.Hobby2</h3>
+<img src="~/Image/@Model.Hobby2Image">
+<p>@Model.Hobby2Description</p>
+</div>
+<div class="portfolio-img-box">
+<h3>@Model.Hobby3</h3>
+<img src="~/Image/@Model.Hobby3Image">
+<p>@Model.Hobby3Description</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="clear: both;"></div>
+<div class="footer">
+<p><strong>Social Media:</strong></p><br>
+<div class="footer-box"><a href="https://www.facebook.com/@Model.Facebook"><i class="fa fa-facebook"></i></a></div>
+<div class="footer-box"><a href="https://www.twitter.com/@Model.Twitter"><i class="fa fa-twitter"></i></a></div>
+<div class="footer-box"><a href="https://www.github.com/@Model.Github"><i class="fa fa-github"></i></a></div>
+<div class="footer-box"><a href="https://www.linkedin.com/@Model.Linkdin"><i class="fa fa-linkedin"></i></a></div>
+</div>
+</div>
+</div>

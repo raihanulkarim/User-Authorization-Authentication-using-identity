@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+<div class="centerElement">
+    @if (User.IsInRole("admin"))
+    {
+        <h1>Hi,<strong> Admin</strong> </h1>
+         <h3>You can view user details and delete the user.<br />
+             Click here to view the user list.<br />
+             <a asp-action="users" asp-controller="home">Users</a>
+         </h3>                 
+
+    }else{
+        <h1>Hi,<strong> @ViewBag.FirstName</strong> </h1>
+        <h3>Thanks for joining with us.</h3>
+    }
+</div>

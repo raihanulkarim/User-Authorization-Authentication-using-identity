@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewData["title"] = "Welcome";
+}
+<div class="centerElement">
+    <h2>Welcome</h2>
+    <p><strong>@ViewBag.FirstName</strong></p>
+    <p>Please,first provide some information to complete your profile.</p>
+    <a asp-action="Create" asp-controller="Profile" >Get Started..</a>
+</div>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebProjectOnAuthorization.ViewModels.UserListViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="centerElement">
+    @if (ViewBag.noUser == true)
+    {
+        <h4><strong>No user found!</strong></h4>
+    }else{
+     <h3>List of Users</h3>
+
+<table class="centerElement">
+    <thead>
+        <tr>
+            <th>
+                Photo
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Status
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="~/Image/@item.ProPic" height="50px" width="50px"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @if(item.IsDisable == true){
+                    <p>Disabled</p>
+                }else{
+                    <p>Active</p>
+                }
+            </td>
+            <td>
+                   <a asp-action="user" asp-route-id="@item.UserId" asp-controller="Profile">Details</a> or, 
+                   <a asp-action="delete" asp-route-id="@item.UserId" asp-controller="Profile">Delete</a>
+                   <a asp-action="action" asp-route-id="@item.UserId" asp-controller="Profile">@if(item.IsDisable == true){
+                    <p>Activate</p>
+                }else{
+                    <p>Disable</p>
+                }</a>
+            </td>
+         </tr>
+     }
+    </tbody>
+</table>
+    }
+
+</div>
