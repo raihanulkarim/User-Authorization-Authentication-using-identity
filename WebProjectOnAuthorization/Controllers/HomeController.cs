@@ -51,6 +51,7 @@ namespace WebProjectOnAuthorization.Controllers
                                       Email = user.Email,
                                       PropPic = user.ProPic,
                                       IsDisable = user.IsDisable,
+                                      IsCompleted = user.IsProfileComplete
                                       //RoleNames = (from userRole in user.Roles 
                                                   // join role in context.Roles on userRole.RoleId
                                                    //equals role.Id
@@ -63,7 +64,8 @@ namespace WebProjectOnAuthorization.Controllers
                                       LastName = p.LastName,
                                       Email = p.Email,
                                       IsDisable = p.IsDisable,
-                                      ProPic = p.PropPic
+                                      ProPic = p.PropPic,
+                                      IsCompleted = p.IsCompleted
                                       //Role = string.Join(",", p.RoleNames)
                                   });;
             var noU = userManager.Users.Count();

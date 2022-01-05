@@ -9,5 +9,6 @@
         public string Email { get; set; }
         public string UserId { get; set; }
         public bool IsDisable { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

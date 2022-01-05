@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Users";
+    var a = "";
 }
 
 <div class="centerElement">
@@ -55,7 +56,8 @@
                 }
             </td>
             <td>
-                   <a asp-action="user" asp-route-id="@item.UserId" asp-controller="Profile">Details</a> or, 
+                            @if(item.IsCompleted!=true){ a = "pointer-events:none; color:black; font-weight:bold"; }else{ a =null; }
+                            <a asp-action="user" asp-route-id="@item.UserId" style="@a" asp-controller="Profile">Details</a> or, 
                    <a asp-action="delete" asp-route-id="@item.UserId" asp-controller="Profile">Delete</a>
                    <a asp-action="action" asp-route-id="@item.UserId" asp-controller="Profile">@if(item.IsDisable == true){
                     <p>Activate</p>
